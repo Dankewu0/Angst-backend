@@ -4,13 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Notifications extends Model
+class Report extends Model
 {
-    protected $fillable = ["user_id", "type", "read_at"];
-    protected $casts = [
-        "read_at" => "datetime",
-    ];
-
+    protected $fillable = ["user_id", "title", "email", "body"];
     public function user()
     {
         return $this->belongsTo(User::class);
