@@ -6,9 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+<<<<<<< HEAD
     /**
      * Run the migrations.
      */
+=======
+>>>>>>> fc2cd7fe379a1017e1f3cd81ca69750b3e2a146a
     public function up(): void
     {
         Schema::create('jobs', function (Blueprint $table) {
@@ -45,9 +48,12 @@ return new class extends Migration
         });
     }
 
+<<<<<<< HEAD
     /**
      * Reverse the migrations.
      */
+=======
+>>>>>>> fc2cd7fe379a1017e1f3cd81ca69750b3e2a146a
     public function down(): void
     {
         Schema::dropIfExists('jobs');

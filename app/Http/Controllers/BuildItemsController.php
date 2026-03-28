@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< HEAD
-use App\Models\cr;
-=======
->>>>>>> fc2cd7fe379a1017e1f3cd81ca69750b3e2a146a
+use App\Models\BuildItems;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class BuildItemsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,11 +34,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-<<<<<<< HEAD
-    public function show(cr $cr)
-=======
-    public function show(string $id)
->>>>>>> fc2cd7fe379a1017e1f3cd81ca69750b3e2a146a
+    public function show(BuildItems $buildItems)
     {
         //
     }
@@ -49,11 +42,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-<<<<<<< HEAD
-    public function edit(cr $cr)
-=======
-    public function edit(string $id)
->>>>>>> fc2cd7fe379a1017e1f3cd81ca69750b3e2a146a
+    public function edit(BuildItems $buildItems)
     {
         //
     }
@@ -61,11 +50,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-<<<<<<< HEAD
-    public function update(Request $request, cr $cr)
-=======
-    public function update(Request $request, string $id)
->>>>>>> fc2cd7fe379a1017e1f3cd81ca69750b3e2a146a
+    public function update(Request $request, BuildItems $buildItems)
     {
         //
     }
@@ -73,11 +58,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-<<<<<<< HEAD
-    public function destroy(cr $cr)
-=======
-    public function destroy(string $id)
->>>>>>> fc2cd7fe379a1017e1f3cd81ca69750b3e2a146a
+    public function destroy(BuildItems $buildItems)
     {
         //
     }
