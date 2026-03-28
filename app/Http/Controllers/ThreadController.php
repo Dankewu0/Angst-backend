@@ -3,63 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Models\Thread;
-use Illuminate\Http\Request;
+use App\Http\Services\ThreadService;
+use App\Http\Requests\ThreadRequest;
 
 class ThreadController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct(protected ThreadService $service) {}
+
+    public function store(ThreadRequest $request)
     {
-        //
+        $thread = $this->service->createThread($request->validated());
+        return response()->json($thread, 201);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Thread $thread)
     {
-        //
+        return response()->json($this->service->getThread($thread));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Thread $thread)
+    public function update(ThreadRequest $request, Thread $thread)
     {
-        //
+        $thread = $this->service->updateThread($thread, $request->validated());
+        return response()->json($thread);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Thread $thread)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Thread $thread)
     {
-        //
+        $this->service->deleteThread($thread);
+        return response()->noContent();
     }
 }

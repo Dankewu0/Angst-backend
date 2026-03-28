@@ -2,83 +2,35 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< HEAD
-use App\Models\cr;
-=======
->>>>>>> fc2cd7fe379a1017e1f3cd81ca69750b3e2a146a
 use Illuminate\Http\Request;
-
+use App\Models\User;
+use App\Http\Services\UserService;
+use App\Http\Requests\UserRequest;
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct(protected UserService $service) {}
     public function index()
     {
-        //
+        $users = $this->service->getUsers();
+        return response()->json($users);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(UserRequest $request)
     {
-        //
+        $user = $this->service->createUser($request->validated());
+         return response()->json($user, 201);
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update(Request $request, User $user)
     {
-        //
+        $user = $this->service->updateUser($user, $request->validated());
+        return response()->json($user, 200);
     }
 
-    /**
-     * Display the specified resource.
-     */
-<<<<<<< HEAD
-    public function show(cr $cr)
-=======
-    public function show(string $id)
->>>>>>> fc2cd7fe379a1017e1f3cd81ca69750b3e2a146a
+    public function destroy(User $user)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-<<<<<<< HEAD
-    public function edit(cr $cr)
-=======
-    public function edit(string $id)
->>>>>>> fc2cd7fe379a1017e1f3cd81ca69750b3e2a146a
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-<<<<<<< HEAD
-    public function update(Request $request, cr $cr)
-=======
-    public function update(Request $request, string $id)
->>>>>>> fc2cd7fe379a1017e1f3cd81ca69750b3e2a146a
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-<<<<<<< HEAD
-    public function destroy(cr $cr)
-=======
-    public function destroy(string $id)
->>>>>>> fc2cd7fe379a1017e1f3cd81ca69750b3e2a146a
-    {
-        //
+        $this->service->deleteUser($user);
+        return response()->json(null, 204);
     }
 }
