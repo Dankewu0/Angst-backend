@@ -3,63 +3,41 @@
 namespace App\Http\Controllers;
 
 use App\Models\BuildItem;
+use App\Http\Services\BuildItemService;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class BuildItemController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct(protected BuildItemService $service) {}
+
+    public function index(Request $request): JsonResponse
     {
-        //
+        $limit = $request->input('limit', 10);
+
+        return response()->json(
+            $this->service->getItems($limit)
+        );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(Request $request): JsonResponse
     {
-        //
+        $item = $this->service->createItem($request->all());
+
+        return response()->json($item, 201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update(Request $request, BuildItem $item): JsonResponse
     {
-        //
+        $item = $this->service->updateItem($item, $request->all());
+
+        return response()->json($item, 200);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(BuildItem $buildItem)
+    public function destroy(BuildItem $item): JsonResponse
     {
-        //
-    }
+        $this->service->deleteItem($item);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(BuildItem $buildItem)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, BuildItem $buildItem)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(BuildItem $buildItem)
-    {
-        //
+        return response()->json(null, 204);
     }
 }
