@@ -3,63 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Models\Notification;
+use App\Http\Services\NotificationService;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class NotificationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct(protected NotificationService $service) {}
+
+    public function index(Request $request): JsonResponse
     {
-        //
+        $perPage = $request->input('perPage', 10);
+        return response()->json($this->service->getNotifications($perPage));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(Request $request): JsonResponse
     {
-        //
+        $channel = $request->input('channel', 'general');
+        $notification = $this->service->sendNotification($request->all(), $channel);
+        return response()->json($notification, 201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function destroy(Notification $notification): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Notification $notification)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Notification $notification)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Notification $notification)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Notification $notification)
-    {
-        //
+        $this->service->deleteNotification($notification);
+        return response()->json(null, 204);
     }
 }

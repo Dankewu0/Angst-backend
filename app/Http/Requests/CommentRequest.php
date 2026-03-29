@@ -24,6 +24,15 @@ class CommentRequest extends FormRequest
     {
         return [
             'content' => 'required|string',
+             'perPage' => 'nullable|integer|min:1|max:100',
+        ];
+
+    }
+    public function messages(): array
+    {
+        return [
+        'perPage.min' => 'Количество записей на страницу должно быть не меньше 1.',
+        'perPage.max' => 'Количество записей на страницу не должно превышать 100.',
         ];
     }
 }

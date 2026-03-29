@@ -24,7 +24,7 @@ class NotificationRequest extends FormRequest
     {
         return [
             'message' => 'required|string',
-
+            'perPage' => 'nullable|integer|min:1|max:100',
         ];
     }
 }

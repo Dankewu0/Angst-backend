@@ -9,6 +9,10 @@ use App\Http\Requests\ThreadRequest;
 class ThreadController extends Controller
 {
     public function __construct(protected ThreadService $service) {}
+    public function index()
+    {
+        return response()->json($this->service->getThread());
+    }
 
     public function store(ThreadRequest $request)
     {
@@ -16,10 +20,6 @@ class ThreadController extends Controller
         return response()->json($thread, 201);
     }
 
-    public function show(Thread $thread)
-    {
-        return response()->json($this->service->getThread($thread));
-    }
 
     public function update(ThreadRequest $request, Thread $thread)
     {

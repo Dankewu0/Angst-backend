@@ -8,38 +8,28 @@ use App\Http\Services\BuildService;
 class BuildController extends Controller
 {
     public function __construct(protected BuildService $service) {}
-    public function index()
+    public function index(Request $request)
     {
-        //
-    }
-
-    public function create()
-    {
-        //
+        $builds = $this->service->getBuilds();
+        return response()->json($builds);
     }
 
     public function store(Request $request)
     {
-        //
+        $build = $this->service->createBuild($request->all());
+        return response()->json($build, 201);
     }
 
-    public function show(Build $build)
-    {
-        //
-    }
-
-    public function edit(Build $build)
-    {
-        //
-    }
 
     public function update(Request $request, Build $build)
     {
-        //
+        $build = $this->service->updateBuild($build, $request->all());
+        return response()->json($build, 200);
     }
 
     public function destroy(Build $build)
     {
-        //
+        $this->service->deleteBuild($build);
+        return response()->json(null, 204);
     }
 }

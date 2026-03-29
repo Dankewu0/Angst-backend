@@ -7,18 +7,12 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class BuildRequest extends FormRequest
 {
-<<<<<<< HEAD
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-=======
->>>>>>> fc2cd7fe379a1017e1f3cd81ca69750b3e2a146a
+
     public function authorize(): bool
     {
         return false;
     }
 
-<<<<<<< HEAD
     /**
      * Get the validation rules that apply to the request.
      *
@@ -29,11 +23,14 @@ class BuildRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-=======
-    public function rules(): array
+            'perPage' => 'nullable|integer|min:1|max:100',
+        ];
+    }
+    public function messages(): array
     {
         return [
->>>>>>> fc2cd7fe379a1017e1f3cd81ca69750b3e2a146a
+        'perPage.min' => 'Количество записей на страницу должно быть не меньше 1.',
+        'perPage.max' => 'Количество записей на страницу не должно превышать 100.',
         ];
     }
 }

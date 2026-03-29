@@ -3,17 +3,16 @@
 namespace App\Http\Services;
 
 use App\Models\Thread;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class ThreadService
 {
-    public function getAllThreads()
+    public function getThread(int $perPage = 10): LengthAwarePaginator
     {
-        return Thread::all();
-    }
-
-    public function getThread(Thread $thread)
-    {
-        return $thread;
+         $perPage = max(1, min($perPage, 10));
+        return Thread::query()
+            ->latest()
+            ->paginate($perPage);
     }
 
     public function createThread(array $data)

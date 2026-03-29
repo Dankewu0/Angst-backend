@@ -23,6 +23,7 @@ class UserRequest extends FormRequest
             'name' => 'required|string',
             'email' => 'required|email',
             'password' => 'required|string',
+            'perPage' => 'nullable|integer|min:1|max:100',
         ];
     }
 
@@ -32,6 +33,8 @@ class UserRequest extends FormRequest
             'name.required' => 'Поле не должно быть пустым.',
             'email.required' => 'Поле не должно быть пустым.',
             'password.required' => 'Поле не должно быть пустым.',
+            'perPage.min' => 'Количество записей на страницу должно быть не меньше 1.',
+            'perPage.max' => 'Количество записей на страницу не должно превышать 100.',
         ];
     }
 }
