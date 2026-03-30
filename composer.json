@@ -11,10 +11,7 @@
     "require": {
         "php": "^8.3",
         "laravel/framework": "^13.0",
-<<<<<<< HEAD
-=======
         "laravel/sanctum": "^4.3",
->>>>>>> fc2cd7fe379a1017e1f3cd81ca69750b3e2a146a
         "laravel/tinker": "^3.0",
         "spatie/laravel-permission": "^7.2"
     },
